@@ -1,15 +1,16 @@
 import { BookOpen, Sparkles } from "lucide-react";
 
 const courses = [
-  { title: "System Design Fundamentals", provider: "Educative", duration: "20h", progress: 0 },
-  { title: "AWS Cloud Practitioner", provider: "AWS Training", duration: "30h", progress: 12 },
-  { title: "Advanced TypeScript Patterns", provider: "Total TS", duration: "15h", progress: 45 },
+  { title: "Cross-Industry Leadership", provider: "Coursera", duration: "20h", progress: 0 },
+  { title: "Data Analytics for All", provider: "edX", duration: "30h", progress: 12 },
+  { title: "Transferable Skills Mastery", provider: "LinkedIn Learning", duration: "15h", progress: 45 },
+  { title: "Strategic Communication", provider: "Udemy", duration: "12h", progress: 0 },
 ];
 
 const Learning = () => {
   return (
-    <div className="min-h-screen pb-24 px-4 pt-6 max-w-2xl mx-auto space-y-6">
-      <div className="flex items-center gap-2">
+    <div className="px-4 pt-6 max-w-5xl mx-auto space-y-6">
+      <div className="flex items-center gap-2 md:hidden">
         <Sparkles className="h-6 w-6 text-primary" />
         <h1 className="text-xl font-display font-bold tracking-tight">
           Skill<span className="text-primary">Arc</span>
@@ -21,9 +22,9 @@ const Learning = () => {
         <h2 className="text-xl font-display font-semibold">Learning Path</h2>
       </div>
 
-      <div className="space-y-3">
+      <div className="grid gap-3 sm:grid-cols-2">
         {courses.map((c) => (
-          <div key={c.title} className="gradient-card rounded-lg border border-border p-4 space-y-3">
+          <div key={c.title} className="gradient-card rounded-2xl border border-border p-4 space-y-3 shadow-md">
             <div className="flex justify-between items-start">
               <div>
                 <h3 className="font-display font-semibold text-sm">{c.title}</h3>

@@ -8,24 +8,34 @@ import {
   Legend,
 } from "recharts";
 
-const skillData = [
-  { skill: "React", current: 85, target: 95 },
-  { skill: "TypeScript", current: 70, target: 90 },
-  { skill: "System Design", current: 45, target: 85 },
-  { skill: "Cloud/AWS", current: 30, target: 80 },
-  { skill: "CI/CD", current: 55, target: 75 },
-  { skill: "Testing", current: 60, target: 85 },
+interface SkillDataPoint {
+  skill: string;
+  current: number;
+  target: number;
+}
+
+interface SkillRadarChartProps {
+  data?: SkillDataPoint[];
+}
+
+const defaultData: SkillDataPoint[] = [
+  { skill: "Leadership", current: 65, target: 85 },
+  { skill: "Communication", current: 75, target: 90 },
+  { skill: "Problem Solving", current: 70, target: 88 },
+  { skill: "Data Analysis", current: 45, target: 80 },
+  { skill: "Project Mgmt", current: 55, target: 85 },
+  { skill: "Strategic Plan.", current: 35, target: 82 },
 ];
 
-const SkillRadarChart = () => {
+const SkillRadarChart = ({ data = defaultData }: SkillRadarChartProps) => {
   return (
     <div className="w-full h-[320px]">
       <ResponsiveContainer width="100%" height="100%">
-        <RadarChart data={skillData} cx="50%" cy="50%" outerRadius="70%">
+        <RadarChart data={data} cx="50%" cy="50%" outerRadius="70%">
           <PolarGrid stroke="hsl(220 20% 22%)" />
           <PolarAngleAxis
             dataKey="skill"
-            tick={{ fill: "hsl(215 15% 55%)", fontSize: 12, fontFamily: "Inter" }}
+            tick={{ fill: "hsl(215 15% 55%)", fontSize: 11, fontFamily: "Inter" }}
           />
           <PolarRadiusAxis
             angle={30}
@@ -34,7 +44,7 @@ const SkillRadarChart = () => {
             axisLine={false}
           />
           <Radar
-            name="Current Skills"
+            name="Your Skills"
             dataKey="current"
             stroke="hsl(160 55% 50%)"
             fill="hsl(160 55% 50%)"
@@ -42,7 +52,7 @@ const SkillRadarChart = () => {
             strokeWidth={2}
           />
           <Radar
-            name="Target Requirements"
+            name="Target Role"
             dataKey="target"
             stroke="hsl(200 70% 55%)"
             fill="hsl(200 70% 55%)"
