@@ -109,3 +109,8 @@
     background: linear-gradient(145deg, hsl(220 22% 13%), hsl(220 22% 9%));
   }
 }
+
+@keyframes progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}

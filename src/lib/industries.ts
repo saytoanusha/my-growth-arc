@@ -95,22 +95,69 @@ export interface UserProfile {
   skills: string[];
 }
 
+// Platform-aware target skill profiles
+const platformTargets: Record<string, Record<string, number>> = {
+  corporate: {
+    Leadership: 90,
+    Communication: 88,
+    "Problem Solving": 85,
+    "Data Analysis": 82,
+    "Project Mgmt": 88,
+    "Strategic Planning": 92,
+  },
+  healthcare: {
+    Leadership: 80,
+    Communication: 92,
+    "Problem Solving": 88,
+    "Data Analysis": 78,
+    "Project Mgmt": 75,
+    "Strategic Planning": 70,
+  },
+  creative: {
+    Leadership: 72,
+    Communication: 90,
+    "Problem Solving": 85,
+    "Data Analysis": 65,
+    "Project Mgmt": 78,
+    "Strategic Planning": 74,
+  },
+  education: {
+    Leadership: 78,
+    Communication: 95,
+    "Problem Solving": 82,
+    "Data Analysis": 70,
+    "Project Mgmt": 76,
+    "Strategic Planning": 72,
+  },
+  manufacturing: {
+    Leadership: 82,
+    Communication: 80,
+    "Problem Solving": 90,
+    "Data Analysis": 75,
+    "Project Mgmt": 88,
+    "Strategic Planning": 80,
+  },
+};
+
 export function generateSkillAnalysis(profile: UserProfile) {
-  // Simulated AI analysis based on role transition
+  const platform = (profile as UserProfile & { platform?: string }).platform ?? "corporate";
+  const targets = platformTargets[platform] ?? platformTargets.corporate;
+
   const baseSkills = [
-    { skill: "Leadership", current: 60, target: 85 },
-    { skill: "Communication", current: 75, target: 90 },
-    { skill: "Problem Solving", current: 70, target: 88 },
-    { skill: "Data Analysis", current: 45, target: 80 },
-    { skill: "Project Mgmt", current: 55, target: 85 },
-    { skill: "Strategic Planning", current: 35, target: 82 },
+    { skill: "Leadership", current: 60 },
+    { skill: "Communication", current: 75 },
+    { skill: "Problem Solving", current: 70 },
+    { skill: "Data Analysis", current: 45 },
+    { skill: "Project Mgmt", current: 55 },
+    { skill: "Strategic Planning", current: 35 },
   ];
 
-  // Adjust based on experience
+  // Boost current scores based on experience
   const expBoost = Math.min(profile.yearsExperience * 2, 20);
   return baseSkills.map((s) => ({
     ...s,
     current: Math.min(s.current + expBoost, 95),
+    target: targets[s.skill] ?? 80,
   }));
 }
 
